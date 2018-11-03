@@ -14,6 +14,7 @@ import DoneButton from './components/DoneButton'
 
 export default class HomeScreen extends Component {
   state = {
+    completedTask: false,
     circles: ['TH', 'MK', 'ML', 'WJ'],
     days: 3
   }
@@ -29,7 +30,7 @@ export default class HomeScreen extends Component {
   }
 
   render() {
-    const { circles, days } = this.state
+    const { circles, days, completedTask } = this.state
 
     return (
       <View style={styles.container}>
@@ -46,7 +47,8 @@ export default class HomeScreen extends Component {
         </View>
         <Task task={'Clean'}/>
         <DaysRemaining days={days}/>
-        <DoneButton decrementDay={this.decrementDay}/>
+        <DoneButton fn={this.decrementDay} text="Done" completedTask={completedTask}/>
+        {/* <PassTimeButton fn={this.decrementDay} text="Pass time" /> */}
       </View>
     );
   }
@@ -84,27 +86,32 @@ const styles = StyleSheet.create({
     width: 269,
     height: 64,
     marginTop: 32,
-    borderRadius: 100,
+    borderRadius: 5,
     backgroundColor: '#F0C808',
     alignItems: 'center',
     justifyContent: 'center'
   },
-  circle: {
-    width: 64,
+  grayedButton: {
+    width: 269,
     height: 64,
-    borderRadius: 100,
-    backgroundColor: '#7DCE82',
+    marginTop: 32,
+    borderRadius: 5,
+    backgroundColor: '#E5E5E5',
     alignItems: 'center',
-    justifyContent: 'center',
-    marginRight: 8
+    justifyContent: 'center'
+  },
+  blueText: {
+    fontSize: 24,
+    color: '#14191E'
+  },
+  grayText: {
+    fontSize: 24,
+    color: '#000000',
+    opacity: 0.5
   },
   goldText: {
     fontSize: 24,
     color: '#F0C808'
-  },
-  blueText: {
-    fontSize: 24,
-    color: '#01539B'
   },
   largeText: {
     fontSize: 48,

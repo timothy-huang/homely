@@ -7,11 +7,11 @@ import TaskAssignerScreen from './TaskAssigner';
 
 const RootStack = createBottomTabNavigator(
   {
-    Home: HomeScreen,
     TaskAssigner: TaskAssignerScreen,
+    Home: HomeScreen
   },
   {
-    initialRouteName: 'Home',
+    initialRouteName: 'TaskAssigner',
   }
 )
 
