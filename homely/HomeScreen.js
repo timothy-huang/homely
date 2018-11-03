@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { 
   StyleSheet, 
   View, 
-  Image
+  Image,
+  Button
 } from 'react-native'
 
 import Circle from './components/Circle'
@@ -11,11 +12,15 @@ import DaysRemaining from './components/DaysRemaining'
 import DoneButton from './components/DoneButton'
 
 
-export default class Homescreen extends Component {
+export default class HomeScreen extends Component {
   state = {
     circles: ['TH', 'MK', 'ML', 'WJ'],
     days: 3
   }
+
+  static navigationOptions = {
+    title: 'Home',
+  };
 
   decrementDay = () => {
     this.setState({
