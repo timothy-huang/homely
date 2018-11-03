@@ -3,37 +3,47 @@ import {
   StyleSheet, 
   Text, 
   View, 
-  TouchableOpacity 
+  TouchableOpacity,
+  Image
 } from 'react-native'
 
+import Circle from './components/Circle'
+import Task from './components/Task'
+import DaysRemaining from './components/DaysRemaining'
+import DoneButton from './components/DoneButton'
+
+
 export default class App extends Component {
+  state = {
+    circles: ['TH', 'MK', 'ML', 'WJ'],
+    days: 3
+  }
+
+  decrementDay = () => {
+    this.setState({
+      days: this.state.days - 1
+    })
+  }
+
   render() {
+    const { circles, days } = this.state
+
     return (
       <View style={styles.container}>
+        <Image 
+          style={styles.image}
+          source={require('./assets/granite.jpg')} 
+          />
         <View style={styles.container2}>
           <View style={styles.circleContainer}>
-            <View style={styles.circle}><Text>TH</Text></View>
-            <View style={styles.circle}><Text>MK</Text></View>
-            <View style={styles.circle}><Text>ML</Text></View>
-            <View style={styles.circle}><Text>WJ</Text></View>
+            {circles.map((c, i) => (
+              <Circle key={i} initials={c} />
+            ))}
           </View>
         </View>
-        <View style={styles.smallContainer}>
-          <Text style={styles.goldText}>Your assignment is</Text>
-          <Text style={styles.largeText}>trash</Text>
-          <View style={styles.underline}></View>
-        </View>
-        <View style = {styles.smallContainer}>
-          <Text style={styles.goldText}>You have</Text>
-          <Text style={styles.largeText}>3</Text>
-          <Text style={styles.goldText}>days left to complete it</Text>
-        </View>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={this.onPress}
-        >
-        <Text style={styles.blueText}>Done</Text>
-        </TouchableOpacity>
+        <Task task={'Clean'}/>
+        <DaysRemaining days={days}/>
+        <DoneButton decrementDay={this.decrementDay}/>
       </View>
     );
   }
@@ -42,7 +52,7 @@ export default class App extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#01539B',
+    backgroundColor: '#012E56',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -54,11 +64,18 @@ const styles = StyleSheet.create({
   container2: {
     width: 100,
     height: 64,
-    justifyContent: 'center'
+    alignItems: 'center',
+    marginBottom: 64
   },
   circleContainer: {
     flex: 1,
     flexDirection: 'row'
+  },
+  image: {
+    position: 'absolute',
+    height: 1000,
+    opacity: 0.30,
+    flex: 1
   },
   button: {
     width: 269,
@@ -74,6 +91,8 @@ const styles = StyleSheet.create({
     height: 64,
     borderRadius: 100,
     backgroundColor: '#7DCE82',
+    alignItems: 'center',
+    justifyContent: 'center',
     marginRight: 8
   },
   goldText: {
