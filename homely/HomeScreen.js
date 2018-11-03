@@ -10,6 +10,7 @@ import Circle from './components/Circle'
 import Task from './components/Task'
 import DaysRemaining from './components/DaysRemaining'
 import DoneButton from './components/DoneButton'
+import PassTimeButton from './components/PassTimeButton'
 
 
 export default class HomeScreen extends Component {
@@ -47,8 +48,8 @@ export default class HomeScreen extends Component {
         </View>
         <Task task={'Clean'}/>
         <DaysRemaining days={days}/>
-        <DoneButton fn={this.decrementDay} text="Done" completedTask={completedTask}/>
-        {/* <PassTimeButton fn={this.decrementDay} text="Pass time" /> */}
+        <DoneButton completedTask={completedTask}/>
+        <PassTimeButton decrementDay={this.decrementDay}/>
       </View>
     );
   }
