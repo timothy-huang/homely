@@ -8,10 +8,11 @@ import {
 const PassTimeButton = ({ decrementDay }) => (
     <TouchableOpacity 
         style={styles.button}
-        onClick={decrementDay()}
+        onPress={() => decrementDay()}
         >
         <Text style={styles.blueText}>Pass Time</Text>
     </TouchableOpacity>
+    
 );
 
 const styles = StyleSheet.create({
