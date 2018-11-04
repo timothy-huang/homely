@@ -22,6 +22,7 @@ export default class HomeScreen extends Component {
       circles: [],
       days: 3,
       late: false,
+      currentUserId: '',
       user: null,
       userChore: 'none',
       loading: true
@@ -36,24 +37,12 @@ export default class HomeScreen extends Component {
         for (var k2 in dict[k1]) {
           if (k2 == 'name') {
             userNames.push(dict[k1][k2])
-          }
+          } 
         }
       }
       this.setState({ circles: userNames });
-    })
-
-    var that = this;
-    firebase.auth().onAuthStateChanged(function(user) {
-      if (user) {
-        // User is signed in.
-        var userId = user.uid
-        var firebaseCurrentUser = firebase.database().ref('/users/' + userId)
-        firebaseCurrentUser.once('value').then(snapshot => {that.storeInfo(snapshot)})
-      } else {
-        // No user is signed in.
-        console.log("no user signed in")
-      }
-    });
+    })  
+    this.updateInfo();
   }
 
   static navigationOptions = {
@@ -70,6 +59,24 @@ export default class HomeScreen extends Component {
         days: this.state.days - 1
       })
     }
+  }
+
+  updateInfo() {
+    var that = this;
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        // User is signed in.
+        var userId = user.uid
+        var firebaseCurrentUser = firebase.database().ref('/users/' + userId)
+        that.setState({
+          currentUserId: userId
+        })
+        firebaseCurrentUser.once('value').then(snapshot => {that.storeInfo(snapshot)})
+      } else {
+        // No user is signed in.
+        console.log("no user signed in")
+      }
+    });
   }
 
   focusUser = (c) => {
@@ -95,15 +102,13 @@ export default class HomeScreen extends Component {
     this.setState({
       user: currentUserName,
       userChore: currentUserChore
-    })
+    }) 
   }
 
   render() {
     const { circles, days, completedTask, late, user, userChore } = this.state
-
     return (
       <View style={styles.container}>
-       
         <Image 
           style={styles.image}
           source={require('../assets/granite.jpg')} 
@@ -117,7 +122,9 @@ export default class HomeScreen extends Component {
         </View>
         <Task user={user} task={userChore}/>
         <DaysRemaining days={days}/>
-        <DoneButton completedTask={completedTask}/>
+        <DoneButton 
+          completedTask={completedTask}
+        />
         <PassTimeButton decrementDay={this.decrementDay} late={late}/>
       </View>
     );

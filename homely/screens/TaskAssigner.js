@@ -29,7 +29,7 @@ export default class TaskAssignerScreen extends React.Component {
 
     var firebaseChores = firebase.database().ref('/chores');
     firebaseChores.once('value').then(snapshot => {
-      // snapshot.val() is the dictionary with all your keys/values from the '/chohres' path
+      // snapshot.val() is the dictionary with all your keys/values from the '/chores' path
       dict = snapshot.val()
       var chore_values = new Array();
       for (var k1 in dict) {
@@ -61,27 +61,27 @@ export default class TaskAssignerScreen extends React.Component {
   render() {
     const { tasks } = this.state
 
-    if (!this.state.isShowingText){
-      return (
-        <View style={styles.container}>
-          <Image 
-            style={styles.image}
-            source={require('../assets/granite.jpg')} 
-          />
-        </View>
-      );
-    } else {
-      var task = tasks[Math.floor(Math.random() * 4)];
-      return (
-        <View style={styles.container}>
-          <Image 
-            style={styles.image}
-            source={require('../assets/granite.jpg')} 
-          />
-          <Text style={styles.whiteText}>{task}</Text>
-        </View>
-      );
-    }    
+    // if (!this.state.isShowingText){
+    //   return (
+    //     <View style={styles.container}>
+    //       <Image 
+    //         style={styles.image}
+    //         source={require('../assets/granite.jpg')} 
+    //       />
+    //     </View>
+    //   );
+    // } else {
+    // var task = tasks[Math.floor(Math.random() * 4)];
+    return (
+      <View style={styles.container}>
+        <Image 
+          style={styles.image}
+          source={require('../assets/granite.jpg')} 
+        />
+        {/* <Text style={styles.whiteText}>{task}</Text> */}
+      </View>
+    );
+    // }   
   }
 }
 

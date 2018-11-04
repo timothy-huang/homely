@@ -17,7 +17,6 @@ class DoneButton extends Component {
   }
 
   render () {
-
     if (this.state.clicked) {
       return (
         <View 
