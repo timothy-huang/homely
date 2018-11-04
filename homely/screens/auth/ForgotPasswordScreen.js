@@ -1,6 +1,5 @@
 import React from 'react';
 import {StyleSheet, View, Text} from 'react-native';
-import { EDEADLK } from 'constants';
 
 export default class ForgotPasswordScreen extends React.Component {
     constructor(props) {
@@ -9,7 +8,7 @@ export default class ForgotPasswordScreen extends React.Component {
     }
 
     render() {
-        return <Text style={{paddingTop:20}}>LoginScren</Text>
+        return <Text style={{paddingTop:20}}>ForgotPasswordScreen</Text>
     }
 }
 
