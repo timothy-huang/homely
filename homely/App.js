@@ -13,7 +13,7 @@ const RootStack = createBottomTabNavigator (
     Home: HomeScreen
   },
   {
-    initialRouteName: 'Home',
+    initialRouteName: 'TaskAssigner',
   }
 )
 
@@ -25,12 +25,6 @@ export default class App extends React.Component {
     // if (!firebase.apps.length) {firebase.initializeApp(ApiKeys.FirebaseConfig);}
   }
   render() {
-    // return (
-    //   <View>
-    //     <Text>pls work</Text>
-    //   </View>
-    // )
-    
     return <RootStack />; 
   }
 }
