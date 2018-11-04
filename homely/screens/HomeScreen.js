@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import { 
   StyleSheet, 
   View, 
-  Image,
-  Button,
-  Text
+  Image
 } from 'react-native'
 
 import Circle from '../components/Circle'
