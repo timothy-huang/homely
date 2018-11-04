@@ -13,7 +13,6 @@ const Task = ({ task }) => (
     </View>
 )
 
-
 const styles = StyleSheet.create({
     smallContainer: {
       marginBottom: 32,

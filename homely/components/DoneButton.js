@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import { 
-  StyleSheet, 
+import {
+  StyleSheet,
   Text,
   View,
   TouchableOpacity
@@ -31,7 +31,7 @@ class DoneButton extends Component {
       )
     }
     return (
-      <TouchableOpacity 
+      <TouchableOpacity
           style={styles.button}
           onPress={() => this.pressedDone()}
           >
@@ -39,7 +39,7 @@ class DoneButton extends Component {
         </TouchableOpacity>
     );
   }
-  
+
 }
 
 const styles = StyleSheet.create({
