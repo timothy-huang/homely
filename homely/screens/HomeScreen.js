@@ -3,14 +3,15 @@ import {
   StyleSheet, 
   View, 
   Image,
-  Button
+  Button,
+  Text
 } from 'react-native'
 
-import Circle from './components/Circle'
-import Task from './components/Task'
-import DaysRemaining from './components/DaysRemaining'
-import DoneButton from './components/DoneButton'
-import PassTimeButton from './components/PassTimeButton'
+// import Circle from '../components/Circle'
+// import Task from '../components/Task'
+// import DaysRemaining from '../components/DaysRemaining'
+// import DoneButton from '../components/DoneButton'
+// import PassTimeButton from '../components/PassTimeButton'
 
 
 export default class HomeScreen extends Component {
@@ -20,22 +21,23 @@ export default class HomeScreen extends Component {
     days: 3
   }
 
-  static navigationOptions = {
-    title: 'Home',
-  };
+  // static navigationOptions = {
+  //   title: 'Home',
+  // };
 
-  decrementDay = () => {
-    this.setState({
-      days: this.state.days - 1
-    })
-  }
+  // decrementDay = () => {
+  //   this.setState({
+  //     days: this.state.days - 1
+  //   })
+  // }
 
   render() {
     const { circles, days, completedTask } = this.state
 
     return (
       <View style={styles.container}>
-        <Image 
+        <Text>hi</Text>
+        {/* <Image 
           style={styles.image}
           source={require('./assets/granite.jpg')} 
           />
@@ -49,7 +51,7 @@ export default class HomeScreen extends Component {
         <Task task={'Clean'}/>
         <DaysRemaining days={days}/>
         <DoneButton completedTask={completedTask}/>
-        <PassTimeButton decrementDay={this.decrementDay}/>
+        <PassTimeButton decrementDay={this.decrementDay}/> */}
       </View>
     );
   }
