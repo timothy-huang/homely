@@ -29,7 +29,7 @@ export default class TaskAssignerScreen extends React.Component {
 
     var firebaseChores = firebase.database().ref('/chores');
     firebaseChores.once('value').then(snapshot => {
-      // snapshot.val() is the dictionary with all your keys/values from the '/store' path
+      // snapshot.val() is the dictionary with all your keys/values from the '/chohres' path
       dict = snapshot.val()
       var chore_values = new Array();
       for (var k1 in dict) {
@@ -40,6 +40,20 @@ export default class TaskAssignerScreen extends React.Component {
         }
       }
       this.setState({ tasks: chore_values });
+      var users = firebase.database().ref('/users')
+      users.once('value').then(snapshot => {
+        var dict = snapshot.val();
+        var listUserIds = new Array();
+        for (var key in dict) {
+          listUserIds.push(key)
+        }
+        while (chore_values.length != 0 && listUserIds.length != 0) {
+          var randomIndex = Math.floor(Math.random()*chore_values.length);
+          firebase.database().ref('/users/' + listUserIds.pop()).update({
+            chore: chore_values.splice(randomIndex, 1)[0]
+          })
+        }
+      })
     })
     
   }

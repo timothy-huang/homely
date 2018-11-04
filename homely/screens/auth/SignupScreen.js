@@ -27,7 +27,7 @@ export default class SignupScreen extends React.Component {
       this.state.password).then(() => {
         // then and catch are methods that we call on the Promise returned from
         // createUserWithEmailAndPassword
-        alert('Your account was created!');
+        // alert('Your account was created!');
         this.setState({
           // Clear out the fields when the user logs in and hide the progress indicator.
           email: '',
@@ -44,7 +44,7 @@ export default class SignupScreen extends React.Component {
       this.setState({
         loading: false
       });
-      alert("Account creation failed: " + error.message );
+      // alert("Account creation failed: " + error.message );
     });
   }
   

@@ -26,7 +26,7 @@ export default class Login extends React.Component {
       this.setState({
         loading: false
       });
-      alert('Successfully logged in!');
+      // alert('Successfully logged in!');
       AsyncStorage.setItem('userData', JSON.stringify(userData));
       this.props.navigation.navigate("SignedIn");
     }).catch((error) =>
@@ -34,7 +34,7 @@ export default class Login extends React.Component {
       this.setState({
         loading: false
       });
-      alert('Login failed. Please try again'+error);
+      // alert('Login failed. Please try again'+error);
     });
   }
   

@@ -1,17 +1,11 @@
 import {
-    AppRegistry,
-    ActivityIndicator,
     AsyncStorage,
     StyleSheet,
     Text,
     View,
-    Image,
-    TouchableHighlight,
     TouchableOpacity,
-    ToolbarAndroid
   } from 'react-native';
   import React, {Component} from 'react';
-  import { Header,Container,Title, Content, List, ListItem, InputGroup, Input, Icon, Picker, Button, Card } from 'native-base';
   import * as firebase from 'firebase';
 
   const accountStyles = StyleSheet.create({

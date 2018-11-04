@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { 
   StyleSheet, 
   View, 
-  Image
+  Image,
+  AsyncStorage
 } from 'react-native'
 
 import Circle from '../components/Circle'
@@ -11,6 +12,7 @@ import DaysRemaining from '../components/DaysRemaining'
 import DoneButton from '../components/DoneButton'
 import PassTimeButton from '../components/PassTimeButton'
 
+import * as firebase from 'firebase';
 
 export default class HomeScreen extends Component {
   constructor(props) {
@@ -20,11 +22,38 @@ export default class HomeScreen extends Component {
       circles: [],
       days: 3,
       late: false,
-      user: 'Timothy Huang'
+      user: null,
+      userChore: 'none',
+      loading: true
     }
+    this.storeInfo = this.storeInfo.bind(this)
 
     var firebaseUsers = firebase.database().ref('/users');
+    firebaseUsers.once('value').then(snapshot => {
+      dict = snapshot.val()
+      var userNames = new Array();
+      for (var k1 in dict) {
+        for (var k2 in dict[k1]) {
+          if (k2 == 'name') {
+            userNames.push(dict[k1][k2])
+          }
+        }
+      }
+      this.setState({ circles: userNames });
+    })
 
+    var that = this;
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        // User is signed in.
+        var userId = user.uid
+        var firebaseCurrentUser = firebase.database().ref('/users/' + userId)
+        firebaseCurrentUser.once('value').then(snapshot => {that.storeInfo(snapshot)})
+      } else {
+        // No user is signed in.
+        console.log("no user signed in")
+      }
+    });
   }
 
   static navigationOptions = {
@@ -44,13 +73,34 @@ export default class HomeScreen extends Component {
   }
 
   focusUser = (c) => {
+    var cho = '';
+    firebase.database().ref('/users/').once('value').then(snapshot => {
+      var dict = snapshot.val();
+      for (key in dict){
+        if (dict[key].name == c) {
+          cho = dict[key].chore
+        }
+      }
+      this.setState({
+        user: c,
+        userChore: cho
+      })
+    })
+  }
+
+  storeInfo(snapshot){
+    information = snapshot.val();
+    currentUserName = snapshot.val().name;
+    currentUserChore = snapshot.val().chore;
     this.setState({
-      user: c
+      user: currentUserName,
+      userChore: currentUserChore
     })
   }
 
   render() {
-    const { circles, days, completedTask, late, user } = this.state
+    const { circles, days, completedTask, late, user, userChore } = this.state
+
     return (
       <View style={styles.container}>
        
@@ -65,7 +115,7 @@ export default class HomeScreen extends Component {
             ))}
           </View>
         </View>
-        <Task user={user} task={'Clean'}/>
+        <Task user={user} task={userChore}/>
         <DaysRemaining days={days}/>
         <DoneButton completedTask={completedTask}/>
         <PassTimeButton decrementDay={this.decrementDay} late={late}/>
