@@ -19,13 +19,13 @@ export default class TaskAssignerScreen extends React.Component {
       tasks: []
     };
     
-    setTimeout(() => clearInterval(randomizer), 4800);
+    // setTimeout(() => clearInterval(randomizer), 4800);
 
-    var randomizer = setInterval(() => (
-      this.setState(previousState => (
-      { isShowingText: !previousState.isShowingText }
-      ))
-    ), 300);
+    // var randomizer = setInterval(() => (
+    //   this.setState(previousState => (
+    //   { isShowingText: !previousState.isShowingText }
+    //   ))
+    // ), 300);
 
     var firebaseChores = firebase.database().ref('/chores');
     firebaseChores.once('value').then(snapshot => {
@@ -78,7 +78,7 @@ export default class TaskAssignerScreen extends React.Component {
           style={styles.image}
           source={require('../assets/granite.jpg')} 
         />
-        {/* <Text style={styles.whiteText}>{task}</Text> */}
+        <Text style={styles.whiteText}>Assigned new tasks</Text>
       </View>
     );
     // }   

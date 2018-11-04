@@ -3,7 +3,8 @@ import {
   StyleSheet, 
   View, 
   Image,
-  AsyncStorage
+  AsyncStorage,
+  Button
 } from 'react-native'
 
 import Circle from '../components/Circle'
@@ -25,7 +26,8 @@ export default class HomeScreen extends Component {
       currentUserId: '',
       user: null,
       userChore: 'none',
-      loading: true
+      loading: true,
+      tasks: []
     }
     this.storeInfo = this.storeInfo.bind(this)
 
@@ -105,6 +107,38 @@ export default class HomeScreen extends Component {
     }) 
   }
 
+  assignTasks(){
+    var firebaseChores = firebase.database().ref('/chores');
+    firebaseChores.once('value').then(snapshot => {
+      // snapshot.val() is the dictionary with all your keys/values from the '/chores' path
+      dict = snapshot.val()
+      var chore_values = new Array();
+      for (var k1 in dict) {
+        for (var k2 in dict[k1]) {
+            if (k2 == 'task') {
+              chore_values.push(dict[k1][k2]);
+            }
+        }
+      }
+      this.setState({ tasks: chore_values });
+      var users = firebase.database().ref('/users')
+      users.once('value').then(snapshot => {
+        var dict = snapshot.val();
+        var listUserIds = new Array();
+        for (var key in dict) {
+          listUserIds.push(key)
+        }
+        while (chore_values.length != 0 && listUserIds.length != 0) {
+          var randomIndex = Math.floor(Math.random()*chore_values.length);
+          firebase.database().ref('/users/' + listUserIds.pop()).update({
+            chore: chore_values.splice(randomIndex, 1)[0]
+          })
+        }
+      })
+    })
+    this.updateInfo();
+  }
+
   render() {
     const { circles, days, completedTask, late, user, userChore } = this.state
     return (
@@ -126,6 +160,10 @@ export default class HomeScreen extends Component {
           completedTask={completedTask}
         />
         <PassTimeButton decrementDay={this.decrementDay} late={late}/>
+        <Button 
+          onPress={() => this.assignTasks()}
+          title="Assign Tasks"  
+        />
       </View>
     );
   }
