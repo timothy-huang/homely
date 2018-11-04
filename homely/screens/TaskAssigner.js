@@ -14,7 +14,7 @@ export default class TaskAssignerScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isShowingText: true,
+      isShowingText: false,
       tasks: []
     };
     
@@ -22,9 +22,9 @@ export default class TaskAssignerScreen extends React.Component {
 
     var randomizer = setInterval(() => (
       this.setState(previousState => (
-        { isShowingText: !previousState.isShowingText }
+      { isShowingText: !previousState.isShowingText }
       ))
-    ), 200);
+    ), 300);
 
     var firebaseChores = firebase.database().ref('/chores');
     firebaseChores.once('value').then(snapshot => {
@@ -45,19 +45,19 @@ export default class TaskAssignerScreen extends React.Component {
 
   render() {
     const { tasks } = this.state
-    if (!this.state.isShowingText) {
-      return(
+
+    if (!this.isShowingText){
+      return (
+        <View style={styles.container}></View>
+      );
+    } else {
+      var task = tasks[Math.floor(Math.random() * 4)];
+      return (
         <View style={styles.container}>
+          <Text style={styles.whiteText}>{task}</Text>
         </View>
-      )
-    }
-    var task = tasks[Math.floor(Math.random() * 4)];
-    return (
-      <View style={styles.container}>
-        <Text style={styles.whiteText}>{task}</Text>
-      </View>
-    );
-    
+      );
+    }    
   }
 }
 
