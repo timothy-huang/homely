@@ -7,8 +7,7 @@ import TaskAssignerScreen from './screens/TaskAssigner';
 import * as firebase from 'firebase';
 import ApiKeys from './constants/ApiKeys'
 
-firebase.initializeApp(ApiKeys.FireBaseConfig);
-
+// firebase.initializeApp(ApiKeys.FireBaseConfig);
 
 const RootStack = createBottomTabNavigator (
   {
@@ -27,8 +26,8 @@ export default class App extends React.Component {
 
     // if (!firebase.apps.length) {firebase.initializeApp(ApiKeys.FirebaseConfig);}
   }
-  render() {
 
+  render() {
     return <RootStack />; 
   }
 }
