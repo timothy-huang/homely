@@ -4,11 +4,13 @@ import {
   Text, 
   StyleSheet
 } from 'react-native'
+import firebase from 'react-native-firebase'
 
 export default class TaskAssignerScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      currenUser: null,
       isShowingText: true,
       tasks: ['Clean toilet', 'Take out trash', 'Wash dishes', 'Buy paper towels']
     };
@@ -23,21 +25,31 @@ export default class TaskAssignerScreen extends React.Component {
     
   }
 
+  componentDidMount() {
+    const { currentUser } = firebase.auth()
+    this.setState({ currentUser })
+  }
+
   render() {
     const { tasks } = this.state
     if (!this.state.isShowingText) {
-      return(
+      return (
         <View style={styles.container}>
+          <Text>
+            Hi {currentUser && currentUser.email}!
+          </Text>
         </View>
       )
     }
     var task = tasks[Math.floor(Math.random() * 4)];
     return (
       <View style={styles.container}>
+        <Text>
+          Hi {currentUser && currentUser.email}!
+        </Text>
         <Text style={styles.whiteText}>{task}</Text>
       </View>
     );
-    
   }
 }
 

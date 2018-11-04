@@ -2,42 +2,35 @@ import React, { Component } from 'react';
 import { 
   StyleSheet, 
   View, 
-  Image,
-  Button
+  Image
 } from 'react-native'
 
-import Circle from './components/Circle'
-import Task from './components/Task'
-import DaysRemaining from './components/DaysRemaining'
-import DoneButton from './components/DoneButton'
-import PassTimeButton from './components/PassTimeButton'
-
+import Circle from '../components/Circle'
+import UserTaskComponent from '../components/UserTaskComponent'
 
 export default class HomeScreen extends Component {
   state = {
-    completedTask: false,
-    circles: ['TH', 'MK', 'ML', 'WJ'],
-    days: 3
+    currentUser: null,
+    circles: ['TH', 'MK', 'ML', 'WJ']
+  }
+
+  componentDidMount() {
+    const { currentUser } = firebase.auth()
+    this.setState({ currentUser })
   }
 
   static navigationOptions = {
     title: 'Home',
   };
 
-  decrementDay = () => {
-    this.setState({
-      days: this.state.days - 1
-    })
-  }
-
   render() {
-    const { circles, days, completedTask } = this.state
+    const { circles } = this.state
 
     return (
       <View style={styles.container}>
         <Image 
           style={styles.image}
-          source={require('./assets/granite.jpg')} 
+          source={require('../assets/granite.jpg')} 
           />
         <View style={styles.container2}>
           <View style={styles.circleContainer}>
@@ -46,10 +39,7 @@ export default class HomeScreen extends Component {
             ))}
           </View>
         </View>
-        <Task task={'Clean'}/>
-        <DaysRemaining days={days}/>
-        <DoneButton completedTask={completedTask}/>
-        <PassTimeButton decrementDay={this.decrementDay}/>
+        <UserTaskComponent user={0}/>
       </View>
     );
   }
