@@ -4,6 +4,8 @@ import { createBottomTabNavigator } from 'react-navigation';
 
 import HomeScreen from './HomeScreen';
 import TaskAssignerScreen from './TaskAssigner';
+import * as firebase from 'firebase';
+import ApiKeys from './constants/ApiKeys'
 
 const RootStack = createBottomTabNavigator(
   {
@@ -16,6 +18,14 @@ const RootStack = createBottomTabNavigator(
 )
 
 export default class App extends React.Component {
+
+  constructor(props) {
+    super(props);
+  
+    this.state = {};
+
+    if (!firebase.apps.length) {firebase.initializeApp(ApiKeys.FirebaseConfig);}
+  }
   render() {
     return <RootStack />;
   }
