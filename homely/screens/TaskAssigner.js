@@ -31,8 +31,12 @@ export default class TaskAssignerScreen extends React.Component {
       // snapshot.val() is the dictionary with all your keys/values from the '/store' path
       dict = snapshot.val()
       var chore_values = new Array();
-      for (var key in dict) {
-          chore_values.push(dict[key]);
+      for (var k1 in dict) {
+        for (var k2 in dict[k1]) {
+            if (k2 == 'task') {
+              chore_values.push(dict[k1][k2]);
+            }
+        }
       }
       this.setState({ tasks: chore_values });
     })
