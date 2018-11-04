@@ -7,13 +7,16 @@ import TaskAssignerScreen from './TaskAssigner';
 import * as firebase from 'firebase';
 import ApiKeys from './constants/ApiKeys'
 
-const RootStack = createBottomTabNavigator(
+const RootStack = createBottomTabNavigator (
   {
     TaskAssigner: TaskAssignerScreen,
-    Home: HomeScreen
+    Home: HomeScreen,
+    Loading: Loading,
+    SignUp: SignUp,
+    Login: Login
   },
   {
-    initialRouteName: 'TaskAssigner',
+    initialRouteName: 'Loading',
   }
 )
 

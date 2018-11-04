@@ -7,7 +7,7 @@ import {
 
 const Task = ({ task }) => (
     <View style={styles.smallContainer}>
-          <Text style={styles.whiteText}>Your assignment is</Text>
+          <Text style={styles.whiteText}>You need to</Text>
           <Text style={styles.largeText}>{task}</Text>
           <View style={styles.underline}></View>
     </View>

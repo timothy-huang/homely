@@ -2,26 +2,38 @@ import React, {Component} from 'react';
 import { 
   StyleSheet, 
   Text,
+  View,
   TouchableOpacity
 } from 'react-native'
 
 
 class DoneButton extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      done: false
+    }
+  }
+
+  pressedDone = () => {
+    this.setState({
+      done: true
+    })
+  }
 
   render () {
-    if (this.props.completedTask) {
+    const { done } = this.state;
+    if (done) {
       return (
-        <TouchableOpacity 
-          style={styles.grayedButton}
-          >
-          <Text style={styles.grayedText}>Done</Text>
-        </TouchableOpacity>
-      );
+      <View style={styles.grayedButton}>
+          <Text style={styles.grayText}>Done</Text>
+      </View>
+      )
     }
     return (
       <TouchableOpacity 
           style={styles.button}
-          onClick={() => this.props.completedTask = true}
+          onPress={() => this.pressedDone()}
           >
           <Text style={styles.blueText}>Done</Text>
         </TouchableOpacity>

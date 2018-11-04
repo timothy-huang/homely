@@ -37,7 +37,6 @@ export default class TaskAssignerScreen extends React.Component {
         <Text style={styles.whiteText}>{task}</Text>
       </View>
     );
-    
   }
 }
 
