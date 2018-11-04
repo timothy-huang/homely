@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import { 
   View,
   Text, 
-  StyleSheet
+  StyleSheet,
+  Image
 } from 'react-native'
 
 import * as firebase from 'firebase';
@@ -18,7 +19,7 @@ export default class TaskAssignerScreen extends React.Component {
       tasks: []
     };
     
-    setTimeout(() => clearInterval(randomizer), 2200);
+    setTimeout(() => clearInterval(randomizer), 4800);
 
     var randomizer = setInterval(() => (
       this.setState(previousState => (
@@ -46,14 +47,23 @@ export default class TaskAssignerScreen extends React.Component {
   render() {
     const { tasks } = this.state
 
-    if (!this.isShowingText){
+    if (!this.state.isShowingText){
       return (
-        <View style={styles.container}></View>
+        <View style={styles.container}>
+          <Image 
+            style={styles.image}
+            source={require('../assets/granite.jpg')} 
+          />
+        </View>
       );
     } else {
       var task = tasks[Math.floor(Math.random() * 4)];
       return (
         <View style={styles.container}>
+          <Image 
+            style={styles.image}
+            source={require('../assets/granite.jpg')} 
+          />
           <Text style={styles.whiteText}>{task}</Text>
         </View>
       );
@@ -71,6 +81,12 @@ const styles = StyleSheet.create({
   whiteText: {
     fontSize: 24,
     color: '#F5FAFF'
+  },
+  image: {
+    position: 'absolute',
+    height: 1000,
+    opacity: 0.30,
+    flex: 1
   }
 });
 

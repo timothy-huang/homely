@@ -5,9 +5,9 @@ import {
   View 
 } from 'react-native'
 
-const Task = ({ task }) => (
+const Task = ({ task, user }) => (
     <View style={styles.smallContainer}>
-          <Text style={styles.whiteText}>Your assignment is</Text>
+          <Text style={styles.whiteText}>{user} must</Text>
           <Text style={styles.largeText}>{task}</Text>
           <View style={styles.underline}></View>
     </View>

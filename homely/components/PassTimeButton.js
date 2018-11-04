@@ -5,15 +5,27 @@ import {
   TouchableOpacity
 } from 'react-native'
 
-const PassTimeButton = ({ decrementDay }) => (
-    <TouchableOpacity 
-        style={styles.button}
-        onPress={() => decrementDay()}
-        >
-        <Text style={styles.blueText}>Pass Time</Text>
-    </TouchableOpacity>
-    
-);
+const PassTimeButton = ({ decrementDay, late }) => {
+    if (late) {
+      return (
+        <TouchableOpacity 
+          style={styles.grayedButton}
+          onPress={() => decrementDay()}
+          >
+          <Text style={styles.grayText}>Pass Time</Text>
+        </TouchableOpacity>
+      )
+    } else {
+      return (
+        <TouchableOpacity 
+            style={styles.button}
+            onPress={() => decrementDay()}
+            >
+            <Text style={styles.blueText}>Pass Time</Text>
+        </TouchableOpacity>
+      )
+    }
+  };
 
 const styles = StyleSheet.create({
   button: {

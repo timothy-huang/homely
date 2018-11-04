@@ -2,12 +2,25 @@ import React, { Component } from 'react';
 import { 
   StyleSheet, 
   Text, 
-  View 
+  View,
+  TouchableOpacity
 } from 'react-native'
 
-const Circle = ({ initials }) => (
-    <View style={styles.circle}><Text style={styles.text}>{initials}</Text></View>
-)
+
+
+const Circle = ({ name, focusUser }) => {
+    var initials = name.match(/\b(\w)/g).join('');
+    return (
+        <TouchableOpacity
+            style={styles.circle}
+            onPress={() => focusUser(name)}
+            >
+            <Text style={styles.text}>{initials}</Text>
+        </TouchableOpacity>
+    )
+}
+
+
 
 const styles = StyleSheet.create({
     text: {

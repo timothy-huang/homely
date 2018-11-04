@@ -15,8 +15,10 @@ import PassTimeButton from '../components/PassTimeButton'
 export default class HomeScreen extends Component {
   state = {
     completedTask: false,
-    circles: ['TH', 'MK', 'ML', 'WJ'],
-    days: 3
+    circles: ['Timothy Huang', 'Manan Khattar', 'Mulan Zhao'],
+    days: 3,
+    late: false,
+    user: 'Timothy Huang'
   }
 
   static navigationOptions = {
@@ -24,14 +26,25 @@ export default class HomeScreen extends Component {
   };
 
   decrementDay = () => {
+    if (this.state.days == 0) {
+      this.setState({
+        late: true
+      })
+    } else {
+      this.setState({
+        days: this.state.days - 1
+      })
+    }
+  }
+
+  focusUser = (c) => {
     this.setState({
-      days: this.state.days - 1
+      user: c
     })
   }
 
   render() {
-    const { circles, days, completedTask } = this.state
-
+    const { circles, days, completedTask, late, user } = this.state
     return (
       <View style={styles.container}>
        
@@ -42,14 +55,14 @@ export default class HomeScreen extends Component {
         <View style={styles.container2}>
           <View style={styles.circleContainer}>
             {circles.map((c, i) => (
-              <Circle key={i} initials={c} />
+              <Circle key={i} name={c} focusUser={this.focusUser}/>
             ))}
           </View>
         </View>
-        <Task task={'Clean'}/>
+        <Task user={user} task={'Clean'}/>
         <DaysRemaining days={days}/>
         <DoneButton completedTask={completedTask}/>
-        <PassTimeButton decrementDay={this.decrementDay}/>
+        <PassTimeButton decrementDay={this.decrementDay} late={late}/>
       </View>
     );
   }
