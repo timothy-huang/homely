@@ -13,12 +13,18 @@ import PassTimeButton from '../components/PassTimeButton'
 
 
 export default class HomeScreen extends Component {
-  state = {
-    completedTask: false,
-    circles: ['Timothy Huang', 'Manan Khattar', 'Mulan Zhao'],
-    days: 3,
-    late: false,
-    user: 'Timothy Huang'
+  constructor(props) {
+    super(props);
+    this.state = {
+      completedTask: false,
+      circles: [],
+      days: 3,
+      late: false,
+      user: 'Timothy Huang'
+    }
+
+    var firebaseUsers = firebase.database().ref('/users');
+
   }
 
   static navigationOptions = {
