@@ -136,6 +136,7 @@ export default class HomeScreen extends Component {
         }
       })
     })
+
     this.updateInfo();
   }
 
