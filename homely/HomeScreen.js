@@ -6,11 +6,11 @@ import {
   Button
 } from 'react-native'
 
-import Circle from './../components/Circle'
-import Task from './../components/Task'
-import DaysRemaining from './../components/DaysRemaining'
-import DoneButton from './../components/DoneButton'
-import PassTimeButton from './../components/PassTimeButton'
+import Circle from './components/Circle'
+import Task from './components/Task'
+import DaysRemaining from './components/DaysRemaining'
+import DoneButton from './components/DoneButton'
+import PassTimeButton from './components/PassTimeButton'
 
 
 export default class HomeScreen extends Component {
@@ -37,7 +37,7 @@ export default class HomeScreen extends Component {
       <View style={styles.container}>
         <Image
           style={styles.image}
-          source={require('./../assets/granite.jpg')}
+          source={require('./assets/granite.jpg')}
           />
         <View style={styles.container2}>
           <View style={styles.circleContainer}>

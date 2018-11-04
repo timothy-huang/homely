@@ -2,12 +2,12 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import { createBottomTabNavigator } from 'react-navigation';
 
-import HomeScreen from './HomeScreen';
-import TaskAssignerScreen from './TaskAssigner';
+import HomeScreen from './screens/HomeScreen';
+import TaskAssignerScreen from './screens/TaskAssigner';
+import TaskPage from './screens/TaskPage';
 import * as firebase from 'firebase';
 import ApiKeys from './constants/ApiKeys'
 
-import * as firebase from 'firebase';
 const config = {
     apiKey: "AIzaSyCvwLlNZ8E0FTqqs5wR12BE9WWpLb2GpMo",
     authDomain: "homely-956b9.firebaseapp.com",
@@ -21,10 +21,11 @@ const config = {
 const RootStack = createBottomTabNavigator(
   {
     TaskAssigner: TaskAssignerScreen,
-    Home: HomeScreen
+    Home: HomeScreen,
+    Tasks: TaskPage
   },
   {
-    initialRouteName: 'TaskAssigner',
+    initialRouteName: 'Tasks',
   }
 )
 
@@ -32,7 +33,6 @@ export default class App extends React.Component {
 
   constructor(props) {
     super(props);
-  
     this.state = {};
 
     if (!firebase.apps.length) {firebase.initializeApp(ApiKeys.FirebaseConfig);}
