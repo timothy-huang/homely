@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
-    "expo": "^31.0.2",
+    "expo": "^46.0.14",
     "firebase": "^5.5.7",
     "jshint": "^2.9.6",
     "native-base": "^2.8.1",
